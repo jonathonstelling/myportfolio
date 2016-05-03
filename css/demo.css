@@ -403,6 +403,9 @@ h4{
       stroke-dashoffset: 2200;
       animation: dash 5s linear forwards;
       -webkit-animation: dash 5s linear forwards;
+      -moz-animation: dash 5s linear forwards;
+	  -ms-animation: dash 5s linear forwards;
+	  animation: dash 5s linear forwards;
     }
 
     @keyframes dash {
