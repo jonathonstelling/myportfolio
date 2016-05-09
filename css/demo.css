@@ -36,6 +36,31 @@ body {
 	color: #222;
 }
 
+#home {
+    background-image: url(../images/homeBG.jpg); !important
+    background-size: 100% 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#contact {
+    background-image: url(../images/contactBG.jpg); !important
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#projects {
+    background-image: url(../images/projectBG.jpg); !important
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
 /*---------------Menu Text---------------*/
 a {
 	color: #5d5d5d;
@@ -419,7 +444,7 @@ h4{
       }
     }
 
-.frontLogo{ 
+.frontLogo{
     transition: all 1s ease-in-out; 
 }
 
@@ -432,30 +457,17 @@ h4{
   opacity: 0.75;
 }
 
-.mainLogo{ 
+.sideLogos{ 
     transition: all .3s ease-in-out; 
 }
 
-.mainLogo:hover { 
-  -webkit-transform:scale(0.99);
-  -moz-transform:scale(0.99);
-  -ms-transform:scale(0.99);
-  -o-transform:scale(0.99);
-  transform:scale(0.99);
-  opacity: 1;
-}
-
-.sideLogo{ 
-    transition: all .3s ease-in-out; 
-}
-
-.sideLogo:hover { 
-  -webkit-transform:scale(1.06);
-  -moz-transform:scale(1.06);
-  -ms-transform:scale(1.06);
-  -o-transform:scale(1.06);
-  transform:scale(1.06);
-  opacity: 1;
+.sideLogos:hover { 
+  -webkit-transform:scale(1.15);
+  -moz-transform:scale(1.15);
+  -ms-transform:scale(1.15);
+  -o-transform:scale(1.15);
+  transform:scale(1.15);
+  opacity: 0.85;
 }
 
 .skillBars{ 
@@ -585,6 +597,7 @@ IMG.imgcentered {
 .portfolioTitle { 
   letter-spacing: 10px;
   font-size: 35px;
+  font-weight: bold;
 }
     
 .projectTitleImg{
@@ -653,6 +666,10 @@ IMG.imgcentered {
     padding-left:45%;
     position: relative;
 }
+    
+.twoColumnPadding{
+    padding-right: 10px;
+    }
       
 }
 
@@ -662,6 +679,7 @@ IMG.imgcentered {
 .portfolioTitle { 
   letter-spacing: 10px;
   font-size: 25px;
+  font-weight: bold;
 }
 
 /*-----CENTER PROJECT DESCRIPTION----*/ 
@@ -696,6 +714,10 @@ width:100%;
   column-count:         2;
   column-gap:           5px;  
 }
+
+.hideForMobileTablet{
+    display: none;
+    }
     
 .showForMobile{
     display: none;
@@ -707,14 +729,19 @@ width:100%;
     position: relative;
 }
     
+.twoColumnPadding{
+    padding-right: 10px;
+    }
+    
 }
 
 /*--------------------------------------Mobile-------------------------------------*/
 @media screen and (max-width : 601px) {
 
 .portfolioTitle { 
-  letter-spacing: 7px;
+  letter-spacing: 5px;
   font-size: 16px;
+  font-weight: bold;
 }
 
   #imgandtext {
@@ -743,7 +770,7 @@ width:100%;
   column-gap:           5px;  
 }
     
-.hideForMobile{
+.hideForMobileTablet{
     display: none;
     }
     
