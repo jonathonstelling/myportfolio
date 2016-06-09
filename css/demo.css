@@ -422,6 +422,8 @@ h4{
     }
 
 #frontLogo{
+    margin-left: 32%;
+    margin-right: 32%;
     transition: all 1s ease-in-out; 
 }
 
@@ -433,6 +435,7 @@ h4{
   transform:scale(0.9);
   opacity: 0.75;
   -webkit-filter: blur(4px);
+  filter: blur(4px);
 }
 
 .sideLogos{ 
@@ -460,8 +463,6 @@ h4{
   transform:scale(0.9);
   opacity: 0.75;
 }
-
-
 
 /*------------- Full Page Graphic --------------*/
 @media all and (orientation:portrait) {
@@ -655,6 +656,11 @@ IMG.imgcentered {
 /*--------------------------------------Tablet-------------------------------------*/
 @media screen and (max-width : 1024px) {
     
+#frontLogo{
+    margin-left: 20%;
+    margin-right: 20%;
+    }
+    
 .portfolioTitle { 
   letter-spacing: 10px;
   font-size: 25px;
@@ -716,6 +722,11 @@ width:100%;
 
 /*--------------------------------------Mobile-------------------------------------*/
 @media screen and (max-width : 601px) {
+    
+#frontLogo{
+    margin-left: 0%;
+    margin-right: 0%;
+    }
 
 .portfolioTitle { 
   letter-spacing: 5px;
