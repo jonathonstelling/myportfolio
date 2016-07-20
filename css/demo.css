@@ -564,6 +564,10 @@ IMG.imgcentered {
   transform:scale(1.3);
 }
 
+.modalCloseIcon{
+    margin-right: 10%;
+}
+
 /*--------------------------------------Desktop------------------------------------*/
 @media screen and (min-width : 1025px) {
     
