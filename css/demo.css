@@ -1,5 +1,5 @@
 /**
- * @author Jonathon Stelling | http://jonnystelling.com
+ * @author Jonathon Stelling | http://jonathonstelling.com
  */
 
 * {
@@ -22,6 +22,8 @@ body {
 	color: #222;
 }
 
+/* Project page backgrounds */
+
 #radial_engine {
     background-image: url(../images/home_image_1.jpg); !important
     width:100%;
@@ -34,6 +36,156 @@ body {
 
 #it {
     background-image: url(../images/it_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#portfolioGame {
+    background-image: url(../images/portfolio_game_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#fillapp {
+    background-image: url(../images/fillapp_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#bridge {
+    background-image: url(../images/bridge_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#petro {
+    background-image: url(../images/petro_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#nestle {
+    background-image: url(../images/nestle_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#ecco {
+    background-image: url(../images/ecco_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#itrolly {
+    background-image: url(../images/itrolly_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#bbq {
+    background-image: url(../images/bbq_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#emotioncube {
+    background-image: url(../images/emotion_cube_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#hairdryer {
+    background-image: url(../images/hair_dryer_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#healthplay {
+    background-image: url(../images/health_play_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#interactivedisplay {
+    background-image: url(../images/interactive_display_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#meatquest {
+    background-image: url(../images/meatquest_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#activeform {
+    background-image: url(../images/active_form_background.jpg); !important
+    width:100%;
+    background-size: 100%;
+	background-repeat: repeat;
+	font-family: 'Lato', Helvetica, sans-serif;
+	font-size: 16px;
+	color: #222;
+}
+
+#dogballthrower {
+    background-image: url(../images/dog_ball_thrower_background.jpg); !important
     width:100%;
     background-size: 100%;
 	background-repeat: repeat;
@@ -369,6 +521,11 @@ h4{
 
 .spacing{
     padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.spaceprojects{
+    padding-top: 150px;
     padding-bottom: 10px;
 }
 
