@@ -1,239 +1,118 @@
-(function($) {
-	"use strict";
+jQuery(document).ready(function($){
+	//check media query
+	var mediaQuery = window.getComputedStyle(document.querySelector('.cd-background-wrapper'), '::before').getPropertyValue('content').replace(/"/g, '').replace(/'/g, ""),
+		//define store some initial variables
+		halfWindowH = $(window).height()*0.5,
+		halfWindowW = $(window).width()*0.5,
+		//define a max rotation value (X and Y axises)
+		maxRotationY = 5,
+		maxRotationX = 3,
+		aspectRatio;
 
-	$(window).on('load', function() {
-	    $(".preloader").fadeOut("slow", function() {
-	        $(".preloader-left").addClass("slide-left");
-	    });
-
-	    $('#lionhero').owlCarousel({
-	        animateOut: 'fadeOut',
-	        nav: true,
-	        navText: [
-	            '<i class="ion-ios-arrow-thin-left"></i>',
-	            '<i class="ion-ios-arrow-thin-right"></i>'
-	        ],
-	        items: 1,
-	        navSpeed: 400,
-	        loop: true,
-	        autoplay: true,
-	        autoplayTimeout: 4000,
-	        autoplayHoverPause: true,
-	    });
-
-	    $('#liontextslider').owlCarousel({
-	        nav: false,
-	        items: 1,
-	        navSpeed: 400,
-	        loop: true,
-	        autoplay: true,
-	        autoplayTimeout: 4000,
-	        autoplayHoverPause: true,
-	    });
-
-	    $('#liontestimonial').owlCarousel({
-	        nav: true,
-	        navText: [
-	            '<i class="ion-ios-arrow-thin-left"></i>',
-	            '<i class="ion-ios-arrow-thin-right"></i>'
-	        ],
-	        items: 1,
-	        navSpeed: 400,
-	        loop: true,
-	        autoplay: true,
-	        autoplayTimeout: 4000,
-	        autoplayHoverPause: true,
-	    });
+	//detect if hero <img> has been loaded and evaluate its aspect-ratio
+	$('.cd-floating-background').find('img').eq(0).load(function() {
+		aspectRatio = $(this).width()/$(this).height();
+  		if( mediaQuery == 'web' && $('html').hasClass('preserve-3d') ) initBackground();
+	}).each(function() {
+		//check if image was previously load - if yes, trigger load event
+  		if(this.complete) $(this).load();
+	});
+	
+	//detect mouse movement
+	$('.cd-background-wrapper').on('mousemove', function(event){
+		if( mediaQuery == 'web' && $('html').hasClass('preserve-3d') ) {
+			window.requestAnimationFrame(function(){
+				moveBackground(event);
+			});
+		}
 	});
 
-	$('.portfolio-block, .menu-item').on('click', function() {
-
-	    //Portfolio masonry
-	    var $container = $('#portfolio-container');
-	    $container.isotope({
-	        masonry: {
-	            columnWidth: '.portfolio-item'
-	        },
-	        itemSelector: '.portfolio-item'
-	    });
-	    $('#filters').on('click', 'li', function() {
-	        $('#filters li').removeClass('active');
-	        $(this).addClass('active');
-	        var filterValue = $(this).attr('data-filter');
-	        $container.isotope({ filter: filterValue });
-	    });
-
+	//on resize - adjust .cd-background-wrapper and .cd-floating-background dimentions and position
+	$(window).on('resize', function(){
+		mediaQuery = window.getComputedStyle(document.querySelector('.cd-background-wrapper'), '::before').getPropertyValue('content').replace(/"/g, '').replace(/'/g, "");
+		if( mediaQuery == 'web' && $('html').hasClass('preserve-3d') ) {
+			window.requestAnimationFrame(function(){
+				halfWindowH = $(window).height()*0.5,
+				halfWindowW = $(window).width()*0.5;
+				initBackground();
+			});
+		} else {
+			$('.cd-background-wrapper').attr('style', '');
+			$('.cd-floating-background').attr('style', '').removeClass('is-absolute');
+		}
 	});
 
-	// Typing Animation (Typed.js)
-	$('#element').typed({
-	    strings: ["UX, UI Designer", "Web App Developer", "Social Animal!"],
-	    typeSpeed: 0,
-	    loop: true,
-	    startDelay: 500,
-	    backDelay: 3000,
-	    contentType: 'html',
-	});
+	function initBackground() {
+		var wrapperHeight = Math.ceil(halfWindowW*2/aspectRatio), 
+			proportions = ( maxRotationY > maxRotationX ) ? 1.1/(Math.sin(Math.PI / 2 - maxRotationY*Math.PI/180)) : 1.1/(Math.sin(Math.PI / 2 - maxRotationX*Math.PI/180)),
+			newImageWidth = Math.ceil(halfWindowW*2*proportions),
+			newImageHeight = Math.ceil(newImageWidth/aspectRatio),
+			newLeft = halfWindowW - newImageWidth/2,
+			newTop = (wrapperHeight - newImageHeight)/2;
 
-	//Video background
-	$(".player").mb_YTPlayer({
-	    containment: '#video-wrapper',
-	    mute: true,
-	    showControls: false,
-	    quality: 'default',
-	    startAt: 5
-	});
-
-	//Portfolio Modal
-	$('.open-project').on('click', function() {
-	    var projectUrl = $(this).attr("href");
-	    $('.inline-menu-container').removeClass('showx');
-	    $('.sidebar-menu').addClass('hidex');
-	    $('.content-blocks.pop').addClass('showx');
-	    $('.content-blocks.pop section').load(projectUrl)
-	    return false;
-	});
-
-	//Blog post Modal
-	$('.open-post').on('click', function() {
-	    var postUrl = $(this).attr("href");
-	    $('.inline-menu-container').removeClass('showx');
-	    $('.sidebar-menu').addClass('hidex');
-	    $('.content-blocks.pop').addClass('showx');
-	    $('.content-blocks.pop section').load(postUrl);
-	    return false;
-	});
-
-	//On Click Open Menu Items
-	$('.menu-block, .menu-item').on('click', function() {
-	    $('.name-block').addClass('reverse');
-	    $('.name-block-container').addClass('reverse');
-	    $('.menu-blocks').addClass('hidex');
-	    $('.inline-menu-container').addClass('showx');
-	    $('.inline-menu-container.style2').addClass('dark');
-	});
-	//On Click Open About/Resume Block
-	$('.about-block, .menu-item.about').on('click', function() {
-	    $('.content-blocks').removeClass('showx');
-	    $('.content-blocks.about').addClass('showx');
-	    $('.menu-item').removeClass('active');
-	    $('.menu-item.about').addClass('active');
-	});
-	//On Click Open Portfolio Block
-	$('.portfolio-block, .menu-item.portfolio').on('click', function() {
-	    $('.content-blocks').removeClass('showx');
-	    $('.content-blocks.portfolio').addClass('showx');
-	    $('.menu-item').removeClass('active');
-	    $('.menu-item.portfolio').addClass('active');
-	});
-	//On Click Open Blog Block
-	$('.blog-block, .menu-item.blog').on('click', function() {
-	    $('.content-blocks').removeClass('showx');
-	    $('.content-blocks.blog').addClass('showx');
-	    $('.menu-item').removeClass('active');
-	    $('.menu-item.blog').addClass('active');
-	});
-	//On Click Open Contact Block
-	$('.contact-block, .menu-item.contact').on('click', function() {
-	    $('.content-blocks').removeClass('showx');
-	    $('.content-blocks.contact').addClass('showx');
-	    $('.menu-item').removeClass('active');
-	    $('.menu-item.contact').addClass('active');
-	});
-
-	//On Click Close Blocks
-	$('#close').on('click', function() {
-	    $('.name-block').removeClass('reverse');
-	    $('.name-block-container').removeClass('reverse');
-	    $('.content-blocks').removeClass('showx');
-	    $('.menu-blocks').removeClass('hidex');
-	    $('.inline-menu-container').removeClass('showx');
-	    $('.menu-item').removeClass('active');
-	});
-	//On Click Close Blog Post And Project Details
-	$('#close-pop').on('click', function() {
-	    $('.content-blocks.pop').removeClass('showx');
-	    $('.sidebar-menu').removeClass('hidex');
-	    $('.inline-menu-container').addClass('showx');
-	    $('.content-blocks.pop section').empty();
-	});
-
-	$('.menu-block, .menu-item, #close').on('click', function() {
-	    $('.content-blocks').animate({ scrollTop: 0 }, 800);
-	});	
-
-	//Function for 'Index-Menu2.html'
-	$('#home').on('click', function() {
-	    $('.content-blocks').removeClass('showx');
-	    $('.menu-item').removeClass('active');
-	    $(this).addClass('active');
-	    $('.inline-menu-container.style2').removeClass('dark');
-	});
-
-	// Intialize Map
-	google.maps.event.addDomListener(window, 'load', init);
-
-	function init() {
-	    // Basic options for a simple Google Map
-	    // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-	    var mapOptions = {
-	        // How zoomed in you want the map to start at (always required)
-	        zoom: 11,
-
-	        // The latitude and longitude to center the map (always required)
-	        center: new google.maps.LatLng(53.9600, -1.0873), 
-
-	        scrollwheel: false,
-
-
-	        // How you would like to style the map.
-	        // This is where you would paste any style found on Snazzy Maps.
-	        styles: [{
-	            featureType: 'all',
-	            stylers: [{
-	                saturation: -65
-	            }]
-	        }, {
-	            featureType: 'road.arterial',
-	            elementType: 'geometry',
-	            stylers: [{
-	                hue: '#00ffee'
-	            }, {
-	                saturation: 80
-	            }]
-	        }, {
-	            featureType: 'poi.business',
-	            elementType: 'labels',
-	            stylers: [{
-	                visibility: 'off'
-	            }]
-	        }]
-	    };
-
-	    // Get the HTML DOM element that will contain your map
-	    // We are using a div with id="map" seen below in the <body>
-	    var mapElement = document.getElementById('map');
-
-	    // Create the Google Map using our element and options defined above
-	    var map = new google.maps.Map(mapElement, mapOptions);
-
-	    var image = 'images/map-marker.png';
-	    // Let's also add a marker while we're at it
-	    var marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(0,0),
-	        map: map,
-	        icon: image,
-	        draggable: true,
-	        animation: google.maps.Animation.DROP
-	    });
-	    marker.addListener('click', toggleBounce);
-
-	    function toggleBounce() {
-	        if (marker.getAnimation() !== null) {
-	            marker.setAnimation(null);
-	        } else {
-	            marker.setAnimation(google.maps.Animation.BOUNCE);
-	        }
-	    }
+		//set an height for the .cd-background-wrapper
+		$('.cd-background-wrapper').css({
+			'height' : wrapperHeight,
+		});
+		//set dimentions and position of the .cd-background-wrapper		
+		$('.cd-floating-background').addClass('is-absolute').css({
+			'left' : newLeft,
+			'top' : newTop,
+			'width' : newImageWidth,
+		});
 	}
-})(jQuery);
+
+	function moveBackground(event) {
+		var rotateY = ((-event.pageX+halfWindowW)/halfWindowW)*maxRotationY,
+			rotateX = ((event.pageY-halfWindowH)/halfWindowH)*maxRotationX;
+
+		if( rotateY > maxRotationY) rotateY = maxRotationY;
+		if( rotateY < -maxRotationY ) rotateY = -maxRotationY;
+		if( rotateX > maxRotationX) rotateX = maxRotationX;
+		if( rotateX < -maxRotationX ) rotateX = -maxRotationX;
+
+		$('.cd-floating-background').css({
+			'-moz-transform': 'rotateX(' + rotateX + 'deg' + ') rotateY(' + rotateY + 'deg' + ') translateZ(0)',
+		    '-webkit-transform': 'rotateX(' + rotateX + 'deg' + ') rotateY(' + rotateY + 'deg' + ') translateZ(0)',
+			'-ms-transform': 'rotateX(' + rotateX + 'deg' + ') rotateY(' + rotateY + 'deg' + ') translateZ(0)',
+			'-o-transform': 'rotateX(' + rotateX + 'deg' + ') rotateY(' + rotateY + 'deg' + ') translateZ(0)',
+			'transform': 'rotateX(' + rotateX + 'deg' + ') rotateY(' + rotateY + 'deg' + ') translateZ(0)',
+		});
+	}
+});
+
+/* 	Detect "transform-style: preserve-3d" support, or update csstransforms3d for IE10 ? #762
+	https://github.com/Modernizr/Modernizr/issues/762 */
+(function getPerspective(){
+  var element = document.createElement('p'),
+      html = document.getElementsByTagName('html')[0],
+      body = document.getElementsByTagName('body')[0],
+      propertys = {
+        'webkitTransformStyle':'-webkit-transform-style',
+        'MozTransformStyle':'-moz-transform-style',
+        'msTransformStyle':'-ms-transform-style',
+        'transformStyle':'transform-style'
+      };
+
+    body.insertBefore(element, null);
+
+    for (var i in propertys) {
+        if (element.style[i] !== undefined) {
+            element.style[i] = "preserve-3d";
+        }
+    }
+
+    var st = window.getComputedStyle(element, null),
+        transform = st.getPropertyValue("-webkit-transform-style") ||
+                    st.getPropertyValue("-moz-transform-style") ||
+                    st.getPropertyValue("-ms-transform-style") ||
+                    st.getPropertyValue("transform-style");
+
+    if(transform!=='preserve-3d'){
+      html.className += ' no-preserve-3d';
+    } else {
+    	html.className += ' preserve-3d';
+    }
+    document.body.removeChild(element);
+
+})();
